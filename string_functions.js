@@ -3,7 +3,7 @@ document.title = 'Funções de String';
 
 let name = prompt('Informe o seu nome: '); 
 
-if (name != '') {
+if (name != '' && name != undefined) {
     document.write('<h1> Informações sobre o nome informado: </h1>'); 
     
     let nomeInverso = function (nome) {
