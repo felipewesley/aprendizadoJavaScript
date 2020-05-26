@@ -36,7 +36,8 @@ if (!isNaN(dia) && !isNaN(mes) && !isNaN(ano)) {
 
     let today = new Date(); 
 
-    let dif = Math.abs(lastBirthday.getTime() - today.getTime()); 
+    // let dif = Math.abs(lastBirthday.getTime() - today.getTime()); 
+    let dif = -(lastBirthday.getTime() - today.getTime()); 
 
     /**
      * 1 dia:       24 horas
@@ -49,27 +50,40 @@ if (!isNaN(dia) && !isNaN(mes) && !isNaN(ano)) {
     let result = Math.round(dif/msbyday); 
 
     if (result == 0) {
+        console.log(result); 
+        show(` Seu aniversário é hoje? Estou muito feliz! <u> Parabéns! </u> `); 
+
+    } else if (result == 1) {
+
+        console.log(result); 
+        show(` Seu aniversário foi ontem! Sinto não parabenizar-te antes :( `); 
+
+    } else if (result == -1) {
         
+        console.log(result); 
+        show(` Seu aniversário já é amanha! Estou ansioso para que chegue logo :) `); 
+
+    } else if (result < -1) {
+
+        console.log(result); 
         show(` Algo de errado aconteceu! <u> Ainda não se passou um ano do seu último aniversário. </u>`); 
 
-    } else if( lastBirthday.getDate() < today.getDate() 
-            && lastBirthday.getMonth() <= today.getMonth()
-            && lastBirthday.getFullYear() < today.getFullYear() ){
+    } else if (lastBirthday.getFullYear() < today.getFullYear()-1){
+        
+        console.log(result); 
+        show('Impossível seu último aniversário ter sido há mais de um ano.'); 
 
+    } else if ( lastBirthday.getMonth() <= today.getMonth() && lastBirthday.getFullYear()+1 == today.getFullYear() && lastBirthday.getDate() < today.getDate() ){
+        
+        console.log(result); 
         show(
-            ` Acredito que tenha informado uma data que não seja do seu <u> último aniversário. </u>
+            ` Acredito que a data informada não seja do seu <u> último aniversário. </u>
             <p> <small> Pressione F5 para tentar novamente :) </small> </p>`
             ); 
 
-    } else if (result == 1){
-
-        show(` Seu aniversário é hoje? Estou muito feliz! <u> Parabéns! </u> `); 
-
-    } else if (result == 2) {
+    } else {
         
-        show(` Seu aniversário foi ontem! Sinto não parabenizar-te antes :( `); 
-
-    } else{
+        console.log(result); 
         show(` Já se passaram ${result} dias desde o seu último aniversário. `); 
     }
     
