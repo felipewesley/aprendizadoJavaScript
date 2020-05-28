@@ -1,10 +1,6 @@
 // Definindo o nome do documento
 document.title = 'Eventos - Manipulando DOM'; 
 
-// Atividade de Engenharia de Software II
-// Valendo nota
-// bit.ly/EngSoftFixacao
-
 let show = function(content) {
     content = content == undefined ? 'O conteúdo vai aqui...' : content; 
     return (
