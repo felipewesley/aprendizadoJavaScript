@@ -46,6 +46,7 @@ function clearInput(){
 }
 
 let show = function(content) {
+    content = content == undefined ? 'O conteúdo vai aqui...' : content; 
     return (
         document.write(
             `<div style="
