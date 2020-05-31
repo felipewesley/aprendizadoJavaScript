@@ -1,0 +1,123 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Window </title>
+    <script>
+        function setColor(){
+            let cor = document.getElementById('input_color').value; 
+            return (
+                document.getElementById('color_txt').value = cor.toUpperCase()
+            ); 
+        }
+
+        function controlAlert(tipo, titulo, msg) {
+            let divAlert = document.getElementById('main_alert').style.display; 
+            let visibility; 
+
+            if (divAlert == 'none') {
+                visibility = 'block'; 
+            } else {
+                visibility = 'none'; 
+            }
+
+            document.getElementById('main_alert').className = 'alert '+ tipo; 
+            document.getElementById('alert_title').innerHTML = titulo; 
+            document.getElementById('alert_content').innerHTML = msg; 
+            
+            return (
+                document.getElementById('main_alert').style.display = visibility
+            ); 
+        }
+
+        let janela; 
+
+        function abrirJanela() {
+            let url = document.getElementById('url_site').value; 
+            controlAlert('success','Sucesso!','A janela solicitada foi aberta com sucesso!'); 
+            window.alert('Instruções: \nMantenha a nova guia aberta \nVolte a esta pagina \nFeche a mensagem exibida clicando no ´x´ \nFeche a pagina recem aberta através do botao vermelho (Fechar)'); 
+
+            document.getElementById('btn_abrir').style.display = 'none'; 
+            document.getElementById('btn_fechar').style.display = 'inline'; 
+
+            return janela = window.open(url,'_blank'); 
+        }
+
+        function fecharJanela() {
+            
+            try {
+                janela.close(); 
+                controlAlert('success','Sucesso!','A janela foi fechada.'); 
+            } catch (error) {
+                controlAlert('danger','Algo deu errado!',error); 
+            } finally {
+                document.getElementById('btn_abrir').style.display = 'inline'; 
+                document.getElementById('btn_fechar').style.display = 'none'; 
+            }
+            
+        }
+
+        function imprimirTela() {
+            window.print(); 
+        }
+
+    </script>
+    <style>
+        .alert {
+            border: 1px solid; 
+            border-radius: 7.5px; 
+            padding: 10px; 
+            margin: 7.5px; 
+            width: 450px; 
+            max-width: 90%; 
+            transition: ease 0.5s step-end; 
+        }
+        .primary {
+            background: #C9DEFF; 
+            color: #0059FF; 
+            border-color: #0059FF; 
+        }
+        .success {
+            background: #B3FFC2; 
+            color: #00B850; 
+            border-color: #00B850; 
+        }
+        .danger {
+            background: #FFD1D1; 
+            color: #FF1F1F; 
+            border-color: #FF1F1F; 
+        }
+        #fecha_alert {
+            width: 15px;
+            height: 15px;
+            float: right; 
+            border: solid 1px; 
+            border-radius: 5px;
+            padding: 3px;
+            text-align: center;
+        }
+        #fecha_alert:hover {
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+
+    <div style="display: none;">
+        <input type="text" id="color_txt" disabled>
+        <input type="color" id="input_color">
+        <button onclick="setColor()">set</button>
+    </div>
+    <div class="alert primary" id="main_alert" style="display: none;">
+        <strong> <span id="alert_title"> Seja bem-vindo! </span> </strong> 
+        <span id="alert_content"> Este é um alert do tipo primary. </span>
+        <strong> <span id="fecha_alert" onclick="controlAlert()"> X </span> </strong>
+    </div>
+    <hr>
+    <input type="text" id="url_site" placeholder="Digite aqui o endereço de um site" style="width: 250px;" value="http://www.google.com">
+    <button onclick="abrirJanela()" id="btn_abrir"> Abrir </button>
+    <button onclick="fecharJanela()" id="btn_fechar" style="display: none; color: white; background: red;"> Fechar </button>
+    <hr>
+
+</body>
+</html>
